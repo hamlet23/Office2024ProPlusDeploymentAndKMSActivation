@@ -2,17 +2,14 @@
   <Info Description="Title:&#xA;FullOfficeProPlus2024Installation Configfile.&#xA;&#xA;Description:&#xA;Installs Full Office LTSC Pro Plus 2024 Suite, Activation done by Volume Licensing per public KMS-Servers.&#xA;&#xA;Programs: &#xA;1. Office LTSC ProPlus 2024&#xA;2. Visio LTSC Pro 2024&#xA;3. Project Pro 2024&#xA;&#xA;KMS-Servers:&#xA;1. kms-project.msguides.com&#xA;2. kms8.msguides.com&#xA;3. kms9.msguides.com&#xA;4. e8.us.to&#xA;5. e9.us.to&#xA;&#xA;Activation Command:&#xA;&#xA;Set KMS-Host:                                          cscript ospp.vbs /sethst kms-project.msguides.com&#xA;Activate Volume Licenses:                        cscript ospp.vbs /act &#xA;Verify Volume Licenses are activated:      cscript ospp.vbs /dstatusall&#xA;&#xA;Activation Command Parameters:&#xA;1. /SetHST: Configure KMS Server Host URL&#xA;2. /Act: Activates Configfile-installed Licenses (Parameter could be passed optional Value: Licensekey)&#xA;3. /DStatus: Enables Printing the Output of the &quot;cscript ospp.vbs&quot; Command" />
   <Add OfficeClientEdition="64" Channel="PerpetualVL2024">
     <Product ID="ProPlus2024Volume" PIDKEY="XJ2XN-FW8RK-P4HMP-DKDBV-GCVGB">
-      <Language ID="en-gb" />
       <Language ID="en-us" />
       <ExcludeApp ID="Lync" />
     </Product>
     <Product ID="VisioPro2024Volume" PIDKEY="B7TN8-FJ8V3-7QYCP-HQPMV-YY89G">
-      <Language ID="en-gb" />
       <Language ID="en-us" />
       <ExcludeApp ID="Lync" />
     </Product>
     <Product ID="ProjectPro2024Volume" PIDKEY="FQQ23-N4YCY-73HQ3-FM9WC-76HF4">
-      <Language ID="en-gb" />
       <Language ID="en-us" />
       <ExcludeApp ID="Lync" />
     </Product>
