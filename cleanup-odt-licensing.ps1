@@ -17,19 +17,21 @@ if (-not $scriptDir) {
     $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 }
 
-$possible = @(
-    Join-Path $scriptDir 'ospp.vbs',
-    Join-Path $env:ProgramFiles 'Common Files\Microsoft Shared\OfficeSoftwareProtectionPlatform\ospp.vbs',
-    Join-Path $env:ProgramFiles 'Microsoft Office\Office16\ospp.vbs',
-    Join-Path $env:ProgramFiles 'Microsoft Office\root\Office16\ospp.vbs'
-)
+# Ensure $scriptDir is a single string
+$scriptDir = [string]$scriptDir
 
-# Use ${env:ProgramFiles(x86)} for environment variable names that contain parentheses
-if (${env:ProgramFiles(x86)}) {
-    $possible += @(
-        Join-Path ${env:ProgramFiles(x86)} 'Microsoft Office\Office16\ospp.vbs',
-        Join-Path ${env:ProgramFiles(x86)} 'Microsoft Office\root\Office16\ospp.vbs'
-    )
+$possible = @()
+$possible += Join-Path -Path $scriptDir -ChildPath 'ospp.vbs'
+$possible += Join-Path -Path $env:ProgramFiles -ChildPath 'Common Files\Microsoft Shared\OfficeSoftwareProtectionPlatform\ospp.vbs'
+$possible += Join-Path -Path $env:ProgramFiles -ChildPath 'Microsoft Office\Office16\ospp.vbs'
+$possible += Join-Path -Path $env:ProgramFiles -ChildPath 'Microsoft Office\root\Office16\ospp.vbs'
+
+# Handle ProgramFiles(x86) (requires ${} syntax) and ensure it's a string
+$pf86 = ${env:ProgramFiles(x86)}
+if ($pf86) {
+    $pf86 = [string]$pf86
+    $possible += Join-Path -Path $pf86 -ChildPath 'Microsoft Office\Office16\ospp.vbs'
+    $possible += Join-Path -Path $pf86 -ChildPath 'Microsoft Office\root\Office16\ospp.vbs'
 }
 
 $ospp = $possible | Where-Object { Test-Path $_ } | Select-Object -First 1
