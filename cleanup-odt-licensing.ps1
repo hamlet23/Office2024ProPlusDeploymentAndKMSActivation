@@ -113,7 +113,7 @@ if (Test-Path $ospPath) {
         Remove-Item -Path $ospPath -Recurse -Force -ErrorAction Stop
         Write-Output "Removed $ospPath"
     } catch {
-        Write-Warning "Failed to remove $ospPath: $($_)"
+        Write-Warning "Failed to remove $($ospPath): $($_)"
     }
 } else {
     Write-Output "ProgramData path not present: $ospPath"
