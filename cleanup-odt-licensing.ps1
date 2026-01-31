@@ -24,10 +24,11 @@ $possible = @(
     Join-Path $env:ProgramFiles 'Microsoft Office\root\Office16\ospp.vbs'
 )
 
-if ($env:'ProgramFiles(x86)') {
+# Use ${env:ProgramFiles(x86)} for environment variable names that contain parentheses
+if (${env:ProgramFiles(x86)}) {
     $possible += @(
-        Join-Path $env:'ProgramFiles(x86)' 'Microsoft Office\Office16\ospp.vbs',
-        Join-Path $env:'ProgramFiles(x86)' 'Microsoft Office\root\Office16\ospp.vbs'
+        Join-Path ${env:ProgramFiles(x86)} 'Microsoft Office\Office16\ospp.vbs',
+        Join-Path ${env:ProgramFiles(x86)} 'Microsoft Office\root\Office16\ospp.vbs'
     )
 }
 
@@ -104,7 +105,7 @@ if (Test-Path $ospPath) {
         Compress-Archive -Path (Join-Path $ospPath '*') -DestinationPath $backup -Force -ErrorAction Stop
         Write-Output "Backup created: $backup"
     } catch {
-        Write-Warning "Backup failed: $_"
+        Write-Warning "Backup failed: $($_)"
     }
 
     Write-Output "Removing $ospPath ..."
@@ -112,7 +113,7 @@ if (Test-Path $ospPath) {
         Remove-Item -Path $ospPath -Recurse -Force -ErrorAction Stop
         Write-Output "Removed $ospPath"
     } catch {
-        Write-Warning "Failed to remove $ospPath: $_"
+        Write-Warning "Failed to remove $ospPath: $($_)"
     }
 } else {
     Write-Output "ProgramData path not present: $ospPath"
